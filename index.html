@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    Progress Bar
+</head>
+
+<body>
+    <div class="bar-container">
+        <div id="bar"></div>
+    </div>
+    <button onClick=toggle("start")>Start</button>
+    <button onClick=toggle("pause")>Pause</button>
+    <button onClick=toggle("restart")>Restart</button>
+</body>
+<style>
+    body {
+        background-color: lightgray;
+    }
+
+    .bar,
+    .bar-container {
+        width: 500px;
+        height: 50px;
+        background-color: white;
+    }
+
+    #bar {
+        width: 0;
+        height: 50px;
+        background-color: green;
+    }
+</style>
+<script>
+    
+    var interval
+    var width = 1;
+    const bar = document.getElementById('bar')
+    
+    function toggle(expr){
+        switch(expr){
+            case "start":
+                clearInterval(interval)
+                interval = setInterval(()=>{
+                if(width >= 100){
+                    width = 0
+                    clearInterval(interval)
+                }else{
+                    width += 0.1;
+                    bar.style.width = width + "%"
+                }
+            },5)
+                break;
+            case "pause":
+                clearInterval(interval)
+                break;
+            case "restart":
+                clearInterval(interval);
+                width = 0;
+                bar.style.width = 0;
+            default:  
+              console.log(`out of ${expr}`)
+
+        }
+    }
+    
+</script>
+
+</html>
